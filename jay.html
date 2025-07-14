@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>给欢欢的表白</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #fff;
+        }
+        
+        .container {
+            text-align: center;
+            z-index: 10;
+            position: relative;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            text-shadow: 0 0 10px rgba(255, 105, 180, 0.8);
+            animation: pulse 1.5s infinite alternate;
+            margin-bottom: 20px;
+        }
+        
+        p {
+            font-size: 1.5rem;
+            text-shadow: 0 0 5px rgba(255, 105, 180, 0.8);
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+        
+        .heart {
+            position: absolute;
+            pointer-events: none;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>欢欢，我爱你！</h1>
+        <p>你是我生命中最美好的遇见 ❤️</p >
+    </div>
+    
+    <!-- 背景音乐 -->
+    <audio autoplay loop>
+        <source src="https://music.163.com/song/media/outer/url?id=1824045033.mp3" type="audio/mpeg">
+        <!-- 备用音乐源 -->
+        <source src="https://music.163.com/song/media/outer/url?id=287035.mp3" type="audio/mpeg">
+    </audio>
+    
+    <script>
+        // 创建爱心
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤️';
+            heart.className = 'heart';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.top = Math.random() * 100 + 'vh';
+            heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+            heart.style.opacity = Math.random() * 0.5 + 0.5;
+            heart.style.animationDuration = Math.random() * 3 + 3 + 's';
+            document.body.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
+        }
+        
+        // 初始爱心
+        for (let i = 0; i < 20; i++) {
+            setTimeout(createHeart, i * 300);
+        }
+        
+        // 持续创建爱心
+        setInterval(createHeart, 300);
+        
+        // 点击创建更多爱心
+        document.addEventListener('click', function(e) {
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.innerHTML = '❤️';
+                    heart.className = 'heart';
+                    heart.style.left = e.clientX + 'px';
+                    heart.style.top = e.clientY + 'px';
+                    heart.style.fontSize = Math.random() * 30 + 20 + 'px';
+                    heart.style.opacity = 1;
+                    document.body.appendChild(heart);
+                    
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 3000);
+                }, i * 100);
+            }
+        });
+    </script>
+</body>
+</html>
